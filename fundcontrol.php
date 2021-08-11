@@ -13,14 +13,6 @@ if ('POST' == $_SERVER['REQUEST_METHOD'] && isset($_SESSION['id'])){
 
 
 <?php if ('GET' == $_SERVER['REQUEST_METHOD'] && isset($_SESSION['id'])) :?>
-<?php 
-  $vartotojai = getVartotojas(); 
-  foreach($vartotojai as $arrindex => $array){
-    if($array['ID'] == $_SESSION['id']){
-      $thisuser = $array;
-    }
-  }
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,26 +21,9 @@ if ('POST' == $_SERVER['REQUEST_METHOD'] && isset($_SESSION['id'])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="style.css">
     <script type="text/javascript" src="js/bootstrap.min.js" defer></script>
     <title>Ernesto bankas</title>
-    <style>
-      .sastable {
-        width:90%;
-        margin:auto;
-      }
-      .h2-caption {
-        margin-left: 10%;
-        padding-top:2%;
-      }
-      .moneytext {
-        display:inline-block;
-      }
-      .btndiv {
-        display:flex;
-        flex-direction: row;
-        justify-content: center;
-      }
-    </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -73,8 +48,8 @@ if ('POST' == $_SERVER['REQUEST_METHOD'] && isset($_SESSION['id'])){
   </div>
 </nav>
 <!-- Saskaitos table -->
-<h2 class="h2-caption"><?= $thisuser['Vardas']." ".$thisuser['Pavarde'] ?></h2>
-<div class="sastable">
+<h2 class="h2-caption-fundcontrol"><?= thisUserArray()['Vardas']." ".thisUserArray()['Pavarde'] ?></h2>
+<div class="sastable-fundcontrol">
   <table class="table table-bordered table-hover mt-3">
       <thead>
         <tr>
@@ -85,23 +60,13 @@ if ('POST' == $_SERVER['REQUEST_METHOD'] && isset($_SESSION['id'])){
         </tr>
       </thead>
         <tbody>
-            <?php 
-            $times = 1;
-            foreach($thisuser['IBAN'] as $key => $array){
-                if($times == $_SESSION['IBANID']){
-                    $sasnr = $key;
-                    $suma = $array;
-                }
-                $times++;
-            }
-            ?>
             <tr class="text-center">
                 <th scope="row"><?= $_SESSION['IBANID']?></th>
-                  <td><?= $sasnr ?></td>
+                  <td><?= thisUserSasNR() ?></td>
                   <td scope="row" class="text-center">
-                  <span class="moneytext mx-5"><?= $suma ?> </span>
+                  <span class="moneytext-fundcontrol mx-5"><?= thisUserMoney() ?> </span>
                   <td class="text-center">
-                <div class="btndiv">
+                <div class="btndiv-fundcontrol">
                     <form action="https://localhost/Projektas/Bankas/accountlist.php?route=prideti-lesu" method="post">
                     <button type="submit" class="btn btn-primary btn-sm mx-1">Pridėti lėšų</button>
                     </form>
@@ -115,7 +80,6 @@ if ('POST' == $_SERVER['REQUEST_METHOD'] && isset($_SESSION['id'])){
           </tbody>
       </table>
 </div>
-
 
 </body>
 </html>

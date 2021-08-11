@@ -1,0 +1,38 @@
+
+/*---------------------accountlist-----------------------------------*/
+.sastable-accountlist {
+    width:90%;
+    margin:auto;
+  }
+  .h2-caption-accountlist {
+    margin-left: 10%;
+    padding-top:2%;
+  }
+  .moneytext-accountlist {
+    display:inline-block;
+  }
+  .btndiv-accountlist {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+
+  
+/*----------------------fundcontrol--------------------------------- */
+  .sastable-fundcontrol {
+    width:90%;
+    margin:auto;
+  }
+  .h2-caption-fundcontrol {
+    margin-left: 10%;
+    padding-top:2%;
+  }
+  .moneytext-fundcontrol {
+    display:inline-block;
+  }
+  .btndiv-fundcontrol {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+  }

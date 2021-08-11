@@ -60,26 +60,9 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="style.css">
     <script type="text/javascript" src="js/bootstrap.min.js" defer></script>
     <title>Ernesto bankas</title>
-    <style>
-      .sastable {
-        width:90%;
-        margin:auto;
-      }
-      .h2-caption {
-        margin-left: 10%;
-        padding-top:2%;
-      }
-      .moneytext {
-        display:inline-block;
-      }
-      .btndiv {
-        display:flex;
-        flex-direction: row;
-        justify-content: center;
-      }
-    </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -104,8 +87,8 @@ session_start();
   </div>
 </nav>
 <!-- Saskaitos table -->
-<h2 class="h2-caption"><?= $thisuser['Vardas']." ".$thisuser['Pavarde'] ?></h2>
-<div class="sastable">
+<h2 class="h2-caption-accountlist"><?= $thisuser['Vardas']." ".$thisuser['Pavarde'] ?></h2>
+<div class="sastable-accountlist">
   <table class="table table-bordered table-hover mt-3">
       <thead>
         <tr>
@@ -124,9 +107,9 @@ session_start();
                 <th scope="row">'.$for.'</th>
                   <td>'.$key.'</td>
                   <td scope="row" class="text-center">
-                  <span class="moneytext mx-5">'.$array.' EUR'.'</span>
+                  <span class="moneytext-accountlist mx-5">'.$array.' EUR'.'</span>
                   <td class="text-center">
-                <div class="btndiv">
+                <div class="btndiv-accountlist">
                     <form action="https://localhost/Projektas/Bankas/fundcontrol.php" method="post">
                     <button type="submit" name="a" value='.$for.' class="btn btn-secondary btn-sm mx-1">Tvarkyti sąskaitą</button>
                     </form>

@@ -41,9 +41,13 @@ function router()
     elseif ('POST' == $_SERVER['REQUEST_METHOD'] && 'pasalinti-sas' == $route) {
         pasalintiSas();
     }
+//     else{
+//         echo 'Page not found 404';
+//         die;
+//     }
 }
 
-function pridetiLesas()
+function thisUserArray()
 {
     $vartotojai = getVartotojas();
     foreach($vartotojai as $array){
@@ -51,16 +55,35 @@ function pridetiLesas()
           $thisuser = $array;
         }
     }
+    return $thisuser;
+}
+function thisUserSasNR()
+{
     $times = 1;
-    foreach($thisuser['IBAN'] as $key => $array){
+    foreach(thisUserArray()['IBAN'] as $key => $array){
         if($times == $_SESSION['IBANID']){
             $sasnrarray = $key;
-            $moneyarray = $array;
         }
         $times++;
     }
+    return $sasnrarray;
+}
+function thisUserMoney()
+{
+    $times = 1;
+    foreach(thisUserArray()['IBAN'] as $array){
+        if($times == $_SESSION['IBANID']){
+            $moneyarr = $array;
+        }
+        $times++;
+    }
+    return $moneyarr;
+}
 
+function pridetiLesas()
+{
 
+    header('Location:https://localhost/Projektas/Bankas/fundcontrol.php');
 }
 
 function atimtiLesas() 
