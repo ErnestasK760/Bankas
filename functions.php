@@ -32,13 +32,13 @@ function router()
 {
     $route = $_GET['route'] ?? '';
 
-    if ('prideti-lesas' == $route) {
+    if ('POST' == $_SERVER['REQUEST_METHOD'] && 'prideti-lesas' == $route) {
         pridetiLesas();
     }
-    elseif ('atimti-lesas' == $route) {
+    elseif ('POST' == $_SERVER['REQUEST_METHOD'] && 'atimti-lesas' == $route) {
         atimtiLesas();
     }
-    elseif ('pasalinti-sas' == $route) {
+    elseif ('POST' == $_SERVER['REQUEST_METHOD'] && 'pasalinti-sas' == $route) {
         pasalintiSas();
     }
 }
@@ -46,6 +46,21 @@ function router()
 function pridetiLesas()
 {
     $vartotojai = getVartotojas();
+    foreach($vartotojai as $array){
+        if($array['ID'] == $_SESSION['id']){
+          $thisuser = $array;
+        }
+    }
+    $times = 1;
+    foreach($thisuser['IBAN'] as $key => $array){
+        if($times == $_SESSION['IBANID']){
+            $sasnrarray = $key;
+            $moneyarray = $array;
+        }
+        $times++;
+    }
+
+
 }
 
 function atimtiLesas() 
