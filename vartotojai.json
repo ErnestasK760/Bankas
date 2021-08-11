@@ -1,1 +1,1 @@
-[{"Vardas":"Vardenis","Pavarde":"Pavardenis","SasNR":["LT0100000000000000000"],"ASMK":396090841912,"ID":"0","Money":0},{"Vardas":"Ernestas","Pavarde":"Kapustinskas","IBAN":["LT01822072833723838328","LT01564824578546124555"],"ASMK":"84648413534","ID":2911128186,"Money":0}]
+[{"Vardas":"Vardenis","Pavarde":"Pavardenis","SasNR":{"LT0100000000000000000":0},"ASMK":396090841912,"ID":"0"},{"Vardas":"Ernestas","Pavarde":"Kapustinskas","IBAN":{"LT01967958739817987625":15000,"LT01846781534561845543":75000},"ASMK":"84648413534","ID":7723029998}]

@@ -2,7 +2,7 @@
 function getVartotojas() : array
 {
     if (!file_exists(__DIR__.'/vartotojai.json')) {
-        $vartotojai[] = ["Vardas" => "Vardenis","Pavarde" => "Pavardenis","SasNR" => ["LT0100000000000000000"],"ASMK" => 396090841912,"ID" => "0","Money" => 0];
+        $vartotojai[] = ["Vardas" => "Vardenis","Pavarde" => "Pavardenis","SasNR" => ["LT0100000000000000000" => 0],"ASMK" => 396090841912,"ID" => "0"];
         $vartotojai = json_encode($vartotojai);
         file_put_contents(__DIR__.'/vartotojai.json', $vartotojai);
     }
@@ -30,5 +30,30 @@ function createID()
 
 function router()
 {
-    
+    $route = $_GET['route'] ?? '';
+
+    if ('prideti-lesas' == $route) {
+        pridetiLesas();
+    }
+    elseif ('atimti-lesas' == $route) {
+        atimtiLesas();
+    }
+    elseif ('pasalinti-sas' == $route) {
+        pasalintiSas();
+    }
+}
+
+function pridetiLesas()
+{
+    $vartotojai = getVartotojas();
+}
+
+function atimtiLesas() 
+{
+
+}
+
+function pasalintiSas()
+{
+
 }

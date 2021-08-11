@@ -11,7 +11,7 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
           die;
         }
       }
-      $vartotojai[]= ['Vardas' => $_POST['Vardas'],'Pavarde' => $_POST['Pavarde'],'IBAN' => [$_POST['SasNR']],'ASMK' => $_POST['ASMK'],'ID' => createID(),'Money' => 0];
+      $vartotojai[]= ['Vardas' => $_POST['Vardas'],'Pavarde' => $_POST['Pavarde'],'IBAN' => [$_POST['SasNR'] => 0],'ASMK' => $_POST['ASMK'],'ID' => createID()];
             
 }
     setVartotojas($vartotojai);
