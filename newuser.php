@@ -2,22 +2,8 @@
 
 require __DIR__.'/functions.php';
 session_start();
-if ('POST' == $_SERVER['REQUEST_METHOD']) {
-    $vartotojai = getVartotojas();
-    if($_POST['Vardas'] != ''){
-      foreach($vartotojai as $masindex =>$masyvas){
-        if($masyvas['ASMK'] == $_POST['ASMK']){
-          header('Location: https://localhost/Projektas/Bankas/newuser.php');
-          die;
-        }
-      }
-      $vartotojai[]= ['Vardas' => $_POST['Vardas'],'Pavarde' => $_POST['Pavarde'],'IBAN' => [$_POST['SasNR'] => 0],'ASMK' => $_POST['ASMK'],'ID' => createID()];
-            
-}
-    setVartotojas($vartotojai);
-    header('Location:https://localhost/Projektas/Bankas/index.php');
-    die;
-}
+validateASMK();
+createNewUser();
 ?>
 <?php if ('GET' == $_SERVER['REQUEST_METHOD'] && !isset($_SESSION['id'])) :?>
 <!DOCTYPE html>

@@ -46,6 +46,33 @@ function router()
 //         die;
 //     }
 }
+function validateASMK()
+{
+    if ('POST' == $_SERVER['REQUEST_METHOD']) {
+        $vartotojai = getVartotojas();
+        if($_POST['Vardas'] != ''){
+          foreach($vartotojai as $masindex =>$masyvas){
+            if($masyvas['ASMK'] == $_POST['ASMK']){
+              header('Location: https://localhost/Projektas/Bankas/newuser.php');
+              die;
+                }
+            }
+        }
+    }
+}
+function createNewUser()
+{   
+    if ('POST' == $_SERVER['REQUEST_METHOD']) {
+    $vartotojai = getVartotojas();
+    foreach($vartotojai as $masindex =>$masyvas){
+    $vartotojai[]= ['Vardas' => $_POST['Vardas'],'Pavarde' => $_POST['Pavarde'],'IBAN' => [$_POST['SasNR'] => 0],'ASMK' => $_POST['ASMK'],'ID' => createID()];
+    }
+    setVartotojas($vartotojai);
+    header('Location:https://localhost/Projektas/Bankas/index.php');
+    die;
+    }
+}
+
 function index()
 {
     require __DIR__.'/view/index.php';
