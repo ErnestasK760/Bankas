@@ -1,21 +1,7 @@
 <?php
 require __DIR__.'/functions.php';
 session_start();
-// session_unset();
-if ('POST' == $_SERVER['REQUEST_METHOD']) {
-  session_start();
-  $vartotojai = getVartotojas();
-  foreach($vartotojai as $masindex => $array) {
-    if($_POST['ASMK'] == $array['ASMK']){
-      $_SESSION['id'] = $array['ID'];
-    }
-  }
-  header('Location:https://localhost/Projektas/Bankas/index.php');
-  die;
-}
-if(isset($_SESSION['id'])){
-  print_r($_SESSION['id']);
-}
+validateSessionID();
 ?>
 
 <?php if ('GET' == $_SERVER['REQUEST_METHOD'] && !isset($_SESSION['id'])) :?>

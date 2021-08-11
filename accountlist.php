@@ -35,22 +35,13 @@ session_start();
     </div>
   </div>
 </nav>
-
-
-
 </body>
 </html>
 <?php endif ?>
 
 
-<?php if ('GET' == $_SERVER['REQUEST_METHOD'] && isset($_SESSION['id'])) :?>
-<?php 
-  $vartotojai = getVartotojas(); 
-  foreach($vartotojai as $arrindex => $array){
-    if($array['ID'] == $_SESSION['id']){
-      $thisuser = $array;
-    }
-  }
+<?php if ('GET' == $_SERVER['REQUEST_METHOD'] && isset($_SESSION['id'])) :
+$thisuser = thisUserArray();
 ?>
 
 <!DOCTYPE html>
@@ -99,29 +90,8 @@ session_start();
         </tr>
       </thead>
         <tbody>
-        <?php 
-            $for = 1;
-            foreach($thisuser['IBAN'] as $key => $array){
-                echo
-              '<tr class="text-center">
-                <th scope="row">'.$for.'</th>
-                  <td>'.$key.'</td>
-                  <td scope="row" class="text-center">
-                  <span class="moneytext-accountlist mx-5">'.$array.' EUR'.'</span>
-                  <td class="text-center">
-                <div class="btndiv-accountlist">
-                    <form action="https://localhost/Projektas/Bankas/fundcontrol.php" method="post">
-                    <button type="submit" name="a" value='.$for.' class="btn btn-secondary btn-sm mx-1">Tvarkyti sąskaitą</button>
-                    </form>
-                    <form action="https://localhost/Projektas/Bankas/accountlist.php?route=pasalinti-sas" method="post">
-                    <button type="submit" class="btn btn-danger btn-sm mx-4">Pašalinti sąskaitą</button>
-                    </form>
-                </div>
-                </td>
-            </td>
-            </tr>';
-            $for++;
-            }
+        <?php
+          printSas();
         ?>
           </tbody>
       </table>

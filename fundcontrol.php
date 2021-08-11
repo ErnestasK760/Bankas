@@ -2,13 +2,7 @@
 require __DIR__.'/functions.php';
 session_start();
 print_r($_SESSION);
-if ('POST' == $_SERVER['REQUEST_METHOD'] && isset($_SESSION['id'])){
-    $_SESSION['IBANID']=array();
-    $_SESSION['IBANID'] = $_POST['a'];
-    header('Location:https://localhost/Projektas/Bankas/fundcontrol.php');
-    die;
-}
-
+selectingSas();
 ?>
 
 

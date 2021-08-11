@@ -46,6 +46,63 @@ function router()
 //         die;
 //     }
 }
+function index()
+{
+    require __DIR__.'/view/index.php';
+}
+function printSas()
+{
+    $for = 1;
+    foreach(thisUserArray()['IBAN'] as $key => $array){
+        echo
+      '<tr class="text-center">
+        <th scope="row">'.$for.'</th>
+          <td>'.$key.'</td>
+          <td scope="row" class="text-center">
+          <span class="moneytext-accountlist mx-5">'.$array.' EUR'.'</span>
+          <td class="text-center">
+        <div class="btndiv-accountlist">
+            <form action="https://localhost/Projektas/Bankas/fundcontrol.php" method="post">
+            <button type="submit" name="a" value='.$for.' class="btn btn-secondary btn-sm mx-1">Tvarkyti sąskaitą</button>
+            </form>
+            <form action="https://localhost/Projektas/Bankas/accountlist.php?route=pasalinti-sas" method="post">
+            <button type="submit" class="btn btn-danger btn-sm mx-4">Pašalinti sąskaitą</button>
+            </form>
+        </div>
+        </td>
+    </td>
+    </tr>';
+    $for++;
+    }
+}
+
+function selectingSas()
+{
+    if ('POST' == $_SERVER['REQUEST_METHOD'] && isset($_SESSION['id'])){
+        $_SESSION['IBANID'] =  array();
+        $_SESSION['IBANID'] = $_POST['a'];
+        header('Location:https://localhost/Projektas/Bankas/fundcontrol.php');
+        die;
+        return $_SESSION['IBANID'] = $_SESSION['IBANID'];
+    }
+}
+
+
+function validateSessionID()
+{
+if ('POST' == $_SERVER['REQUEST_METHOD']) {
+    session_start();
+    $vartotojai = getVartotojas();
+    foreach($vartotojai as $masindex => $array) {
+        if($_POST['ASMK'] == $array['ASMK']){
+            $_SESSION['id'] = $array['ID'];
+        }
+    }
+    header('Location:https://localhost/Projektas/Bankas/index.php');
+    die;
+    return $_SESSION['id'] = $_SESSION['id'];
+    }
+}
 
 function thisUserArray()
 {
