@@ -31,7 +31,7 @@ function createID()
 function router()
 {
     $route = $_GET['route'] ?? '';
-
+    
     if ('POST' == $_SERVER['REQUEST_METHOD'] && 'prideti-lesas' == $route) {
         pridetiLesas();
     }
@@ -41,11 +41,16 @@ function router()
     elseif ('POST' == $_SERVER['REQUEST_METHOD'] && 'pasalinti-sas' == $route) {
         pasalintiSas();
     }
+    elseif ('POST' == $_SERVER['REQUEST_METHOD'] && 'prideti-sas' == $route) {
+        pridetiSas();
+    }
+
 //     else{
 //         echo 'Page not found 404';
 //         die;
 //     }
 }
+
 function validateASMK()
 {
     if ('POST' == $_SERVER['REQUEST_METHOD']) {
@@ -64,19 +69,21 @@ function createNewUser()
 {   
     if ('POST' == $_SERVER['REQUEST_METHOD']) {
     $vartotojai = getVartotojas();
-    foreach($vartotojai as $masindex =>$masyvas){
+    if(mb_strlen($_POST['Vardas'],"UTF-8") < 3 || mb_strlen($_POST['Pavarde'],"UTF-8") < 3 ||  mb_strlen($_POST['ASMK'],"UTF-8") < 11){
+        addMessage('danger','Blogai įvesta informacija');
+        header('Location:https://localhost/Projektas/Bankas/newuser.php');
+        die;
+    }   else    {
     $vartotojai[]= ['Vardas' => $_POST['Vardas'],'Pavarde' => $_POST['Pavarde'],'IBAN' => [$_POST['SasNR'] => 0],'ASMK' => $_POST['ASMK'],'ID' => createID()];
-    }
     setVartotojas($vartotojai);
+    addMessage('success','Vartotojas sėkmingai sukurtas');
     header('Location:https://localhost/Projektas/Bankas/index.php');
     die;
+        }
     }
 }
 
-function index()
-{
-    require __DIR__.'/view/index.php';
-}
+
 function printSas()
 {
     $for = 1;
@@ -93,7 +100,7 @@ function printSas()
             <button type="submit" name="a" value='.$for.' class="btn btn-secondary btn-sm mx-1">Tvarkyti sąskaitą</button>
             </form>
             <form action="https://localhost/Projektas/Bankas/accountlist.php?route=pasalinti-sas" method="post">
-            <button type="submit" class="btn btn-danger btn-sm mx-4">Pašalinti sąskaitą</button>
+            <button type="submit" name="b" value='.$for.' class="btn btn-danger btn-sm mx-4">Pašalinti sąskaitą</button>
             </form>
         </div>
         </td>
@@ -106,14 +113,27 @@ function printSas()
 function selectingSas()
 {
     if ('POST' == $_SERVER['REQUEST_METHOD'] && isset($_SESSION['id'])){
+        if(!empty($_POST['a'])){
         $_SESSION['IBANID'] =  array();
         $_SESSION['IBANID'] = $_POST['a'];
         header('Location:https://localhost/Projektas/Bankas/fundcontrol.php');
         die;
         return $_SESSION['IBANID'] = $_SESSION['IBANID'];
+        }else if (!empty($_POST['b'])){
+            $_SESSION['IBANID'] =  array();
+            $_SESSION['IBANID'] = $_POST['b'];
+            return $_SESSION['IBANID'] = $_SESSION['IBANID'];
+        }
     }
 }
 
+function auth()
+{
+    if(!isset($_SESSION['id'])){
+        header('Location:https://localhost/Projektas/Bankas/index.php');
+        die;
+    }
+}
 
 function validateSessionID()
 {
@@ -125,6 +145,7 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
             $_SESSION['id'] = $array['ID'];
         }
     }
+    addMessage('success','Sėkmingai prisijungta');
     header('Location:https://localhost/Projektas/Bankas/index.php');
     die;
     return $_SESSION['id'] = $_SESSION['id'];
@@ -166,16 +187,110 @@ function thisUserMoney()
 
 function pridetiLesas()
 {
-
+    $times = 1;
+    $vartotojai = getVartotojas();
+    foreach($vartotojai as &$array){
+        if($array['ID'] == $_SESSION['id']){
+            foreach($array['IBAN'] as &$value){
+                if($_SESSION['IBANID'] == $times){
+                    $value += $_POST['les_plus'];
+                    print_r($value);
+                    }
+                $times++;
+                }
+        }
+    }
+    setVartotojas($vartotojai);
+    addMessage('success','Lėšos sėkmingai pridėtos');
     header('Location:https://localhost/Projektas/Bankas/fundcontrol.php');
+    die;
 }
 
 function atimtiLesas() 
 {
+    
+        $times = 1;
+        $vartotojai = getVartotojas();
+        foreach($vartotojai as &$array){
+            if($array['ID'] == $_SESSION['id']){
+                foreach($array['IBAN'] as &$value){
+                    if($_SESSION['IBANID'] == $times){
+                        if($value <= $_POST['les_minus']){
+                            $value = 0;
+                        }else{
+                            $value -= $_POST['les_minus'];
+                            print_r($value);
+                        }
+                    $times++;
+                    }
+                }
+            }
+        }
+        setVartotojas($vartotojai);
+        addMessage('success','Lėšos sėkmingai atimtos');
+        header('Location:https://localhost/Projektas/Bankas/fundcontrol.php');
+        die;
 
+
+}
+
+function pridetiSas()
+{
+    $vartotojai = getVartotojas();
+    foreach($vartotojai as &$array){
+        if($array['ID'] == $_SESSION['id']){
+           $array['IBAN'] += [createIBAN() => 0];
+        }
+    }
+    setVartotojas($vartotojai);
+    addMessage('success','Nauja sąskaita sėkmingai sukurta');
+    header('Location:https://localhost/Projektas/Bankas/accountlist.php');
+    die;
 }
 
 function pasalintiSas()
 {
+        echo('aaaa');
+        $times = 1;
+        $vartotojai = getVartotojas();
+        foreach($vartotojai as &$array){
+            if($array['ID'] == $_SESSION['id']){
+                foreach($array['IBAN'] as $key => &$value){
+                    if($_SESSION['IBANID'] == $times){
+                        unset($array['IBAN'][$key]);
+                    }
+                $times++;
+                }
+            }
+        }
+        setVartotojas($vartotojai);
+        addMessage('success','Sąskaita sėkmingai pašalinta');
+        header('Location:https://localhost/Projektas/Bankas/accountlist.php');
+        die;
 
+}
+
+// type succes|danger|info
+function addMessage(string $type, string $msg) : void
+{
+    $_SESSION['msg'][] = ['type' => $type, 'msg' => $msg];
+}
+function clearMessages() : void
+{
+    $_SESSION['msg']= [];
+}
+function showMessages() : void
+{
+    $messages = $_SESSION['msg'];
+    clearMessages();
+    require __DIR__.'/msg.php';
+}
+function logout()
+{
+    session_start();
+    unset($_SESSION['id']);
+    unset($_SESSION['IBANDID']);
+    addMessage('success','Sėkmingai atsijungta');
+    header('Location:https://localhost/Projektas/Bankas/index.php');
+    die;
 }

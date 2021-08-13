@@ -1,6 +1,11 @@
 <?php
 require __DIR__.'/functions.php';
 session_start();
+auth();
+selectingSas();
+router();
+print_r($_POST);
+print_r($_SESSION);
 ?>
 <?php if ('GET' == $_SERVER['REQUEST_METHOD'] && !isset($_SESSION['id'])) :?>
 <!DOCTYPE html>
@@ -37,6 +42,7 @@ session_start();
 </nav>
 </body>
 </html>
+<?php showMessages() ?>;
 <?php endif ?>
 
 
@@ -77,6 +83,7 @@ $thisuser = thisUserArray();
     </div>
   </div>
 </nav>
+<?php showMessages() ?>;
 <!-- Saskaitos table -->
 <h2 class="h2-caption-accountlist"><?= $thisuser['Vardas']." ".$thisuser['Pavarde'] ?></h2>
 <div class="sastable-accountlist">
@@ -95,6 +102,9 @@ $thisuser = thisUserArray();
         ?>
           </tbody>
       </table>
+      <form action="https://localhost/Projektas/Bankas/fundcontrol.php?route=prideti-sas" method="post">
+      <button type="submit" class="btn btn-warning btn-sm mx-1 mb-1">Pridėti sąskaitą</button>
+      </form>
 </div>
 
 

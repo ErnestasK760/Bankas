@@ -35,6 +35,7 @@ createNewUser();
     </div>
   </div>
 </nav>
+<?php showMessages() ?>;
 <!-- Registracijos forma -->
 <form class="row g-3 mx-auto mt-3" method="POST">
 
@@ -101,6 +102,7 @@ createNewUser();
     </div>
   </div>
 </nav>
+<?php showMessages() ?>;
 <!-- Registracijos forma -->
 <form class="row g-3 mx-auto mt-3" method="POST">
 

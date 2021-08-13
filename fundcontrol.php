@@ -1,8 +1,11 @@
 <?php
 require __DIR__.'/functions.php';
 session_start();
-print_r($_SESSION);
+auth();
 selectingSas();
+router();
+print_r($_POST);
+print_r($_SESSION);
 ?>
 
 
@@ -41,6 +44,7 @@ selectingSas();
     </div>
   </div>
 </nav>
+<?php showMessages() ?>;
 <!-- Saskaitos table -->
 <h2 class="h2-caption-fundcontrol"><?= thisUserArray()['Vardas']." ".thisUserArray()['Pavarde'] ?></h2>
 <div class="sastable-fundcontrol">
@@ -58,14 +62,16 @@ selectingSas();
                 <th scope="row"><?= $_SESSION['IBANID']?></th>
                   <td><?= thisUserSasNR() ?></td>
                   <td scope="row" class="text-center">
-                  <span class="moneytext-fundcontrol mx-5"><?= thisUserMoney() ?> </span>
-                  <td class="text-center">
+                  <span class="moneytext-fundcontrol mx-5"><?= thisUserMoney().' EUR'?> </span>
+                  <td class="">
                 <div class="btndiv-fundcontrol">
-                    <form action="https://localhost/Projektas/Bankas/accountlist.php?route=prideti-lesu" method="post">
-                    <button type="submit" class="btn btn-primary btn-sm mx-1">Pridėti lėšų</button>
+                    <form action="https://localhost/Projektas/Bankas/fundcontrol.php?route=prideti-lesas" method="post">
+                    <input name = "les_plus" class="moneyinput-fundcontrol">
+                    <button type="submit" class="btn btn-primary btn-sm mx-1 mb-1">Pridėti lėšų</button>
                     </form>
-                    <form action="https://localhost/Projektas/Bankas/accountlist.php?route=atimti-lesu" method="post">
-                    <button type="submit" class="btn btn-secondary btn-sm mx-1">Atimti lėšas</button>
+                    <form action="https://localhost/Projektas/Bankas/fundcontrol.php?route=atimti-lesas" method="post">
+                    <input name = "les_minus" class="moneyinput-fundcontrol">
+                    <button type="submit" class="btn btn-secondary btn-sm mx-1 mb-1">Atimti lėšas</button>
                     </form>
                 </div>
                 </td>
@@ -74,7 +80,6 @@ selectingSas();
           </tbody>
       </table>
 </div>
-
 </body>
 </html>
 <?php endif ?>

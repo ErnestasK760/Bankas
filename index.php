@@ -3,7 +3,6 @@ require __DIR__.'/functions.php';
 session_start();
 // session_unset();
 ?>
-
 <?php if ('GET' == $_SERVER['REQUEST_METHOD'] && !isset($_SESSION['id'])) : 
 ?>
 <!DOCTYPE html>
@@ -38,7 +37,7 @@ session_start();
 </nav>
 </body>
 </html>
-
+<?php showMessages() ?>;
 <?php endif ?>
 
 <?php if ('GET' == $_SERVER['REQUEST_METHOD'] && isset($_SESSION['id'])) :?>
@@ -76,5 +75,5 @@ session_start();
 </nav>
 </body>
 </html>
-
+<?php showMessages() ?>;
 <?php endif ?>

@@ -2,8 +2,8 @@
 require __DIR__.'/functions.php';
 session_start();
 validateSessionID();
+selectingSas();
 ?>
-
 <?php if ('GET' == $_SERVER['REQUEST_METHOD'] && !isset($_SESSION['id'])) :?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,6 +34,7 @@ validateSessionID();
     </div>
   </div>
 </nav>
+<?php showMessages() ?>;
 <!-- Login forma -->
 <form class="row g-3 mx-auto mt-3" method="POST">
 
@@ -90,6 +91,7 @@ validateSessionID();
     </div>
   </div>
 </nav>
+<?php showMessages() ?>;
 <!-- Login forma -->
 <form class="row g-3 mx-auto mt-3" method="POST">
 
