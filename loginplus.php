@@ -1,11 +1,4 @@
-<?php
-require __DIR__.'/functions.php';
-session_start();
-validateSessionID();
-selectingSas();
-print_r($_POST);
-print_r($_SESSION);
-?>
+<?php if ('GET' == $_SERVER['REQUEST_METHOD'] && isset($_SESSION['id'])) :?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,11 +21,9 @@ print_r($_SESSION);
         <li class="nav-item">
           <a class="nav-link" href="https://localhost/Projektas/Bankas/newuser.php">Naujas vartotojas</a>
         </li>
-        <?php if(isLogged()) : ?>
         <li class="nav-item">
         <a class="nav-link" href="https://localhost/Projektas/Bankas/accountlist.php">Saskaita</a>
         </li>
-        <?php endif ?>
         <li class="nav-item">
         <a class="nav-link" href="https://localhost/Projektas/Bankas/login.php">Prisijungimas</a>
         </li>
@@ -62,3 +53,4 @@ print_r($_SESSION);
 </form>
 </body>
 </html>
+<?php endif ?>

@@ -138,16 +138,20 @@ function auth()
 function validateSessionID()
 {
 if ('POST' == $_SERVER['REQUEST_METHOD']) {
-    session_start();
     $vartotojai = getVartotojas();
     foreach($vartotojai as $masindex => $array) {
         if($_POST['ASMK'] == $array['ASMK']){
             $_SESSION['id'] = $array['ID'];
+            addMessage('success','Sėkmingai prisijungta');
         }
+        // elseif($_POST['ASMK'] != $array['ASMK']){
+        //     addMessage('danger','Blogai suvesta informacija');
+        //     header('Location:https://localhost/Projektas/Bankas/newuser.php');
+        //     die;
+        // }
     }
-    addMessage('success','Sėkmingai prisijungta');
-    header('Location:https://localhost/Projektas/Bankas/index.php');
-    die;
+    // header('Location:https://localhost/Projektas/Bankas/index.php');
+    // die;
     return $_SESSION['id'] = $_SESSION['id'];
     }
 }
