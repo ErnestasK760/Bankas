@@ -294,3 +294,9 @@ function logout()
     header('Location:https://localhost/Projektas/Bankas/index.php');
     die;
 }
+function isLogged()
+{
+    if(isset($_SESSION['id'])){
+        return true;
+    }
+}

@@ -7,10 +7,7 @@ router();
 print_r($_POST);
 print_r($_SESSION);
 ?>
-
-
-<?php if ('GET' == $_SERVER['REQUEST_METHOD'] && isset($_SESSION['id'])) :?>
-
+<?php if(isLogged()) : ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
