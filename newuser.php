@@ -4,6 +4,8 @@ require __DIR__.'/functions.php';
 session_start();
 validateASMK();
 createNewUser();
+print_r($_POST);
+print_r($_SESSION);
 ?>
 <?php if ('GET' == $_SERVER['REQUEST_METHOD'] && !isset($_SESSION['id'])) :?>
 <!DOCTYPE html>
@@ -40,12 +42,12 @@ createNewUser();
 <form class="row g-3 mx-auto mt-3" method="POST">
 
   <div class="col-md-2">
-    <label class="form-label">First name</label>
+    <label class="form-label">Vardas</label>
     <input type="text" name="Vardas" class="form-control" value="">
   </div>
 
   <div class="col-md-2">
-    <label  class="form-label">Last name</label>
+    <label  class="form-label">Pavarde</label>
     <input type="text" name="Pavarde" class="form-control" value="">
   </div>
 
@@ -107,12 +109,12 @@ createNewUser();
 <form class="row g-3 mx-auto mt-3" method="POST">
 
   <div class="col-md-2">
-    <label class="form-label">First name</label>
+    <label class="form-label">Vardas</label>
     <input type="text" name="Vardas" class="form-control" value="">
   </div>
 
   <div class="col-md-2">
-    <label  class="form-label">Last name</label>
+    <label  class="form-label">Pavarde</label>
     <input type="text" name="Pavarde" class="form-control" value="">
   </div>
 

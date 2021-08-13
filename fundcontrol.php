@@ -79,7 +79,13 @@ print_r($_SESSION);
             </tr>
           </tbody>
       </table>
+
+<form action="https://localhost/Projektas/Bankas/accountlist.php" method="get">
+<button type="submit" class="btn btn-warning btn-sm mx-1 mb-1">Grįžti</button>
+</form>
 </div>
+
+
 </body>
 </html>
 <?php endif ?>

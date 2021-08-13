@@ -69,7 +69,7 @@ function createNewUser()
 {   
     if ('POST' == $_SERVER['REQUEST_METHOD']) {
     $vartotojai = getVartotojas();
-    if(mb_strlen($_POST['Vardas'],"UTF-8") < 3 || mb_strlen($_POST['Pavarde'],"UTF-8") < 3 ||  mb_strlen($_POST['ASMK'],"UTF-8") < 11){
+    if(mb_strlen($_POST['Vardas'],"UTF-8") < 3 || mb_strlen($_POST['Pavarde'],"UTF-8") < 3 ||  (mb_strlen($_POST['ASMK'],"UTF-8") < 11 || mb_strlen($_POST['ASMK'],"UTF-8") > 11)){
         addMessage('danger','Blogai įvesta informacija');
         header('Location:https://localhost/Projektas/Bankas/newuser.php');
         die;
@@ -215,11 +215,11 @@ function atimtiLesas()
             if($array['ID'] == $_SESSION['id']){
                 foreach($array['IBAN'] as &$value){
                     if($_SESSION['IBANID'] == $times){
-                        if($value <= $_POST['les_minus']){
-                            $value = 0;
-                        }else{
+                        if($_POST['les_minus'] > $value){
+                            addMessage('danger','Neužtenka lėšų');
+                        }else if ($_POST['les_minus'] <= $value){
                             $value -= $_POST['les_minus'];
-                            print_r($value);
+                            addMessage('success','Lėšos sėkmingai atimtos');
                         }
                     $times++;
                     }
@@ -227,7 +227,6 @@ function atimtiLesas()
             }
         }
         setVartotojas($vartotojai);
-        addMessage('success','Lėšos sėkmingai atimtos');
         header('Location:https://localhost/Projektas/Bankas/fundcontrol.php');
         die;
 
@@ -250,21 +249,22 @@ function pridetiSas()
 
 function pasalintiSas()
 {
-        echo('aaaa');
         $times = 1;
         $vartotojai = getVartotojas();
         foreach($vartotojai as &$array){
             if($array['ID'] == $_SESSION['id']){
                 foreach($array['IBAN'] as $key => &$value){
-                    if($_SESSION['IBANID'] == $times){
+                    if ($_SESSION['IBANID'] == $times && $value == 0){
                         unset($array['IBAN'][$key]);
+                        addMessage('success','Sėkmingai pašalinta sąskaita');
+                    }else if ($_SESSION['IBANID'] == $times && $value > 0){
+                        addMessage('danger','Sąskaitoje yra lėšų');
                     }
-                $times++;
+                    $times++;
                 }
             }
         }
         setVartotojas($vartotojai);
-        addMessage('success','Sąskaita sėkmingai pašalinta');
         header('Location:https://localhost/Projektas/Bankas/accountlist.php');
         die;
 
@@ -289,7 +289,7 @@ function logout()
 {
     session_start();
     unset($_SESSION['id']);
-    unset($_SESSION['IBANDID']);
+    unset($_SESSION['IBANID']);
     addMessage('success','Sėkmingai atsijungta');
     header('Location:https://localhost/Projektas/Bankas/index.php');
     die;

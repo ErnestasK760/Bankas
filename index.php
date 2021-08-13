@@ -1,6 +1,8 @@
 <?php
 require __DIR__.'/functions.php';
 session_start();
+print_r($_POST);
+print_r($_SESSION);
 // session_unset();
 ?>
 <?php if ('GET' == $_SERVER['REQUEST_METHOD'] && !isset($_SESSION['id'])) : 
@@ -37,7 +39,8 @@ session_start();
 </nav>
 </body>
 </html>
-<?php showMessages() ?>;
+<?php showMessages() ?>
+<p>Sveiki atvykę į Ernesto banka!</p>
 <?php endif ?>
 
 <?php if ('GET' == $_SERVER['REQUEST_METHOD'] && isset($_SESSION['id'])) :?>
@@ -75,5 +78,6 @@ session_start();
 </nav>
 </body>
 </html>
-<?php showMessages() ?>;
+<?php showMessages() ?>
+<p>Sveiki atvykę į Ernesto banka!</p>
 <?php endif ?>
