@@ -1,4 +1,8 @@
 
+/* -------------------------newuser------------------------------------ */
+.register-newuser {
+  width:90%;
+}
 /*---------------------accountlist-----------------------------------*/
 .sastable-accountlist {
     width:90%;
@@ -32,11 +36,45 @@
     display:inline-block;
   }
   .btndiv-fundcontrol {
-    display:flex;
-    flex-direction: row;
+    display:inline-flex;
     justify-content: flex-end;
-    width:90%;
+    overflow: hidden;
+    white-space: nowrap;
   }
   .moneyinput-fundcontrol {
     width: 120px;
+  }
+  /*------------------------login------------------------------- */
+  .login-login{
+    width:1000px;
+  }
+  .btn-login {
+    margin-left: 15rem;
+    justify-self: flex-end;
+  }
+  .login-btndiv {
+    display: flex;
+    flex: auto;
+  }
+  .index-login{
+
+  }
+  /* --------------allaccountlist--------------------- */
+  .btndiv-allaccountlist {
+    display:inline-flex;
+    justify-content: flex-end;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .input-allaccountlist{
+    width:100px;
+    margin-bottom: 5px;
+  }
+  .moneytext-allaccountlist {
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .navbar-text {
+    font-weight:600;
   }

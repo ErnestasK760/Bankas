@@ -7,12 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
     <script type="text/javascript" src="js/bootstrap.min.js" defer></script>
-    <title>Ernesto bankas</title>
+    <title>Bankas</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="https://localhost/Projektas/Bankas/index.php">Ernesto Bankas</a>
+    <a class="navbar-brand" href="https://localhost/Projektas/Bankas/index.php">Bankas</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -22,7 +22,7 @@
           <a class="nav-link" href="https://localhost/Projektas/Bankas/newuser.php">Naujas vartotojas</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" href="https://localhost/Projektas/Bankas/accountlist.php">Saskaita</a>
+        <a class="nav-link" href="https://localhost/Projektas/Bankas/accountlist.php">Sąskaita</a>
         </li>
         <li class="nav-item">
         <a class="nav-link" href="https://localhost/Projektas/Bankas/login.php">Prisijungimas</a>

@@ -2,14 +2,10 @@
 require __DIR__.'/functions.php';
 session_start();
 auth();
-selectingSas();
 router();
 print_r($_POST);
 print_r($_SESSION);
 ?>
-<?php if(isLogged()){
-  $thisuser = thisUserArray();} 
-  ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,55 +26,48 @@ print_r($_SESSION);
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <?php if(workerisLogged()):?>
         <li class="nav-item">
-          <a class="nav-link" href="https://localhost/Projektas/Bankas/newuser.php">Naujas vartotojas</a>
-        </li>
-        <?php if(isLogged()):?>
-        <li class="nav-item">
-        <a class="nav-link" href="https://localhost/Projektas/Bankas/accountlist.php">Sąskaita</a>
+        <a class="nav-link" href="https://localhost/Projektas/Bankas/allaccountlist.php">Sąskaitų sąrašas</a>
         </li>
         <?php endif ?>
-        <?php if(isLogged() == false):?>
+        <?php if(!workerisLogged()):?>
         <li class="nav-item">
         <a class="nav-link" href="https://localhost/Projektas/Bankas/login.php">Prisijungimas</a>
         </li>
         <?php endif ?>
-        <?php if(isLogged()):?>
+        <?php if(workerisLogged()):?>
         <li class="nav-item">
         <a class="nav-link" href="https://localhost/Projektas/Bankas/logout.php">Atsijungti</a>
         </li>
         <?php endif ?>
       </ul>
-      <?php if(isLogged()):?>
-      <span class="navbar-text">
-      <?= thisUserArray()['Vardas'] ?>
-      </span>
-      <?php endif ?>
+      <?php if(workerisLogged()) : ?>
+        <span class="navbar-text">
+        <?= $_SESSION['name'] ?>
+        </span>
+        <?php endif ?>
     </div>
   </div>
 </nav>
-<?php showMessages() ?>;
-<!-- Saskaitos table -->
-<h2 class="h2-caption-accountlist"><?= $thisuser['Vardas']." ".$thisuser['Pavarde'] ?></h2>
-<div class="sastable-accountlist">
-  <table class="table table-bordered table-hover">
+<?php showMessages() ?>
+<h2 class="h2-caption-accountlist"><?= 'Visi vartotojai' ?></h2>
+<div class="sastable-allaccountlist">
+  <table class="table table-bordered table-hover mt-2">
       <thead>
         <tr>
           <th scope="col" class="text-center">#</th>
           <th scope="col" class="text-center">Saskaitos nr</th>
+          <th scope="col" class="text-center">Vardas</th>
+          <th scope="col" class="text-center">Pavarde</th>
           <th scope="col" class="text-center">Lėšos</th>
           <th scope="col" class="text-center"></th>
         </tr>
       </thead>
         <tbody>
-        <?php
-          printSas();
-        ?>
-          </tbody>
+        <?php showingallSas(); ?>
+        </tbody>
       </table>
-      <form action="https://localhost/Projektas/Bankas/fundcontrol.php?route=prideti-sas" method="post">
-      <button type="submit" class="btn btn-warning btn-sm mx-1 mb-1">Pridėti sąskaitą</button>
-      </form>
 </div>
 </body>
 </html>
