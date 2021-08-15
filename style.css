@@ -56,9 +56,6 @@
     display: flex;
     flex: auto;
   }
-  .index-login{
-
-  }
   /* --------------allaccountlist--------------------- */
   .btndiv-allaccountlist {
     display:inline-flex;
@@ -74,7 +71,7 @@
     overflow: hidden;
     white-space: nowrap;
   }
-
+/*-------------------navbar------------------------------ */
   .navbar-text {
     font-weight:600;
   }
